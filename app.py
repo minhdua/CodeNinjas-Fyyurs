@@ -56,7 +56,6 @@ class Artist(db.Model):
 	city = db.Column(db.String(120))
 	state = db.Column(db.String(120))
 	phone = db.Column(db.String(120))
-	genres = db.Column(db.String(120))
 	image_link = db.Column(db.String(500))
 	facebook_link = db.Column(db.String(120))
 	website = db.Column(db.String(120))
@@ -208,15 +207,19 @@ def search_artists():
 	# TODO: implement search on artists with partial string search. Ensure it is case-insensitive.
 	# seach for "A" should return "Guns N Petals", "Matt Quevado", and "The Wild Sax Band".
 	# search for "band" should return "The Wild Sax Band".
+	search_term = request.form.get('search_term', '')
+	artists = db.session.query(Artist.id,Artist.name,
+				func.count(presentations.c.id).filter(presentations.c.start_time > datetime.now()).label('num_upcoming_shows'))\
+				.outerjoin(presentations,presentations.c.artist_id == Artist.id)\
+				.filter(Artist.name.ilike(f'%{search_term}%') )\
+				.group_by(Artist.id)\
+				.all()
+	
 	response={
-	"count": 1,
-	"data": [{
-		"id": 4,
-		"name": "Guns N Petals",
-		"num_upcoming_shows": 0,
-	}]
+	"count": len(artists),
+	"data": artists
 	}
-	return render_template('pages/search_artists.html', results=response, search_term=request.form.get('search_term', ''))
+	return render_template('pages/search_artists.html', results=response, search_term=search_term)
 
 @app.route('/artists/<int:artist_id>')
 def show_artist(artist_id):

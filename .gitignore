@@ -75,3 +75,6 @@ instance/
 
 # Ignore VSCode files
 .vscode/
+
+# Ignore migration folders
+migrations/
