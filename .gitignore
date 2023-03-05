@@ -78,3 +78,5 @@ instance/
 
 # Ignore mynote files
 mynote/
+# Ignore migration folders
+migrations/
