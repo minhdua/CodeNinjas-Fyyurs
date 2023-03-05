@@ -76,5 +76,7 @@ instance/
 # Ignore VSCode files
 .vscode/
 
+# Ignore mynote files
+mynote/
 # Ignore migration folders
 migrations/
