@@ -1,0 +1,6 @@
+{% extends 'layouts/main.html' %}
+{% block content %}
+  <h1>Object not found</h1>
+  <p>Sorry, the requested <strong>{{ object_name }}</strong> was not found.</p>
+  <p><a href="{{url_for('index')}}">Back</a></p>
+{% endblock %}

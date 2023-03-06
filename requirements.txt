@@ -4,3 +4,5 @@ flask-moment
 flask-wtf
 flask_sqlalchemy
 flask_migrate
+WTForms
+psycopg2
