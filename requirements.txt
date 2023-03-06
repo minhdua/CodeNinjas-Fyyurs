@@ -3,3 +3,4 @@ python-dateutil
 flask-moment
 flask-wtf
 flask_sqlalchemy
+flask_migrate
