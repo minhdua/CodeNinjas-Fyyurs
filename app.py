@@ -25,7 +25,7 @@ migrate = Migrate(app, db)
 # Models.
 # ----------------------------------------------------------------------------#
 presentations = db.Table(
-	"Shows",
+	"Show",
 	db.Column("id", db.Integer, primary_key=True, autoincrement=True),
 	db.Column("artist_id", db.Integer, db.ForeignKey("Artist.id"), nullable=False),
 	db.Column("venue_id", db.Integer, db.ForeignKey("Venue.id"), nullable=False),
@@ -215,13 +215,14 @@ def delete_venue(venue_id):
 		
 		db.session.delete(venue)
 		db.session.commit()
+		flash('Venue ' + venue.name + ' was successfully deleted!')
 	except Exception as ex:
 		flash("An error occurred. Venue " + venue_id + " could not be deleted.")
 		print(ex)
 		db.session.rollback()
 	finally:
 		db.session.close()
-	return render_template("pages/home.html")
+	return render_template('pages/home.html')
 
 
 # 	Artists
