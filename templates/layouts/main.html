@@ -117,6 +117,11 @@
   <script>window.jQuery || document.write('<script type="text/javascript" src="/static/js/libs/jquery-1.11.1.min.js"><\/script>')</script>
   <script type="text/javascript" src="/static/js/libs/bootstrap-3.1.1.min.js" defer></script>
   <script type="text/javascript" src="/static/js/plugins.js" defer></script>
-
+  <script>
+    async function onDelete(venue_id) {
+      await fetch(`/venues/${venue_id}`,{method:'DELETE'});
+      window.location = "/";
+    }
+  </script>
 </body>
 </html>

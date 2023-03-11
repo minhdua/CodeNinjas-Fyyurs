@@ -74,6 +74,7 @@ def venues():
     return render_template("pages/venues.html", areas=data)
 
 
+# Route to search for venues based on search term
 @app.route("/venues/search", methods=["POST"])
 def search_venues():
     search_term = request.form.get("search_term", "")

@@ -77,10 +77,4 @@
 
 <a href="/venues/{{ venue.id }}/edit"><button class="btn btn-primary btn-lg">Edit</button></a>
 <button id="venue-delete-button" onclick="onDelete('{{venue.id}}')" class="btn btn-primary btn-lg">Delete</button>
-
-<script>
-	function onDelete(venue_id) {
-		fetch(`/venues/${venue_id}`,{method:'DELETE'})
-	}
-</script>
 {% endblock %}
