@@ -6,3 +6,4 @@ flask_sqlalchemy==3.0.3
 flask_migrate==4.0.4
 WTForms==3.0.1
 psycopg2==2.9.5
+load_dotenv=0.1.0

@@ -1,13 +1,17 @@
 import os
 
-SECRET_KEY = os.urandom(32)
-# Grabs the folder where the script runs.
+from dotenv import load_dotenv
+
 basedir = os.path.abspath(os.path.dirname(__file__))
+load_dotenv(os.path.join(basedir, '.env'))
 
 # Enable debug mode.
-DEBUG = True
+DEBUG = os.environ.get('DEBUG') == 'True'
 
 # Connect to the database
-SQLALCHEMY_DATABASE_URI = "postgresql://postgres:postgres@localhost/fyyur"
-SQLALCHEMY_TRACK_MODIFICATIONS = False
-SQLALCHEMY_ECHO = True
+SECRET_KEY = os.environ.get('SECRET_KEY')
+
+SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
+SQLALCHEMY_TRACK_MODIFICATIONS = os.environ.get(
+    'SQLALCHEMY_TRACK_MODIFICATIONS') == 'True'
+SQLALCHEMY_ECHO = os.environ.get('SQLALCHEMY_ECHO') == 'True'
