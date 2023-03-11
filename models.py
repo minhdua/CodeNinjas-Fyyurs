@@ -15,6 +15,16 @@ def create_app(app):
     return db
 
 
+class Show(db.Model):
+    __tablename__ = 'Show'
+    id = db.Column(db.Integer, primary_key=True)
+    start_time = db.Column(db.DateTime)
+    artist_id = db.Column(db.Integer, db.ForeignKey(
+        'Artist.id'), nullable=False)
+    venue_id = db.Column(db.Integer, db.ForeignKey(
+        'Venue.id'), nullable=False)
+
+
 presentations = db.Table(
     "Shows",
     db.Column("id", db.Integer, primary_key=True, autoincrement=True),
@@ -41,8 +51,8 @@ class Venue(db.Model):
     website = db.Column(db.String(120))
     seeking_talent = db.Column(db.Boolean)
     seeking_description = db.Column(db.String(500))
-    artists = db.relationship(
-        "Artist", secondary=presentations, backref=db.backref("venues", lazy=True))
+    shows = db.relationship(
+        "Show", backref="Venue", lazy="joined", cascade='all, delete')
 
 
 class Artist(db.Model):
@@ -59,3 +69,5 @@ class Artist(db.Model):
     genres = db.Column(db.ARRAY(db.String))
     seeking_description = db.Column(db.String(500))
     seeking_venue = db.Column(db.Boolean)
+    shows = db.relationship(
+        "Show", backref="Artist", lazy="joined", cascade='all, delete')
